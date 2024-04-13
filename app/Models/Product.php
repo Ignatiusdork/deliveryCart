@@ -13,7 +13,7 @@ class Product extends Model
         'name', 'description', 'price', 'stock', 'category_id',
     ];
 
-    //relationship
+    // eloquent relationship
     public function category() {
         return $this->belongsTo(Category::class);
     }
