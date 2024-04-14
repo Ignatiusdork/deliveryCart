@@ -16,7 +16,6 @@ class OrderItem extends Model
     // relationships
     public function order() {
         return $this->belongsTo(Order::class);
-
     }
 
     public function product() {
