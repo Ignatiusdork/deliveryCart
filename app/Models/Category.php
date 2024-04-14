@@ -9,8 +9,8 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected $with = [
-        'name', 'description',
+    protected $fillable = [
+        'name', 'description'
     ];
 
     //relationships
