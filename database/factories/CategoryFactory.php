@@ -18,6 +18,7 @@ class CategoryFactory extends Factory
 
     protected $model = Category::class;
 
+    //fake data for database
     public function definition(): array
     {
         return [
