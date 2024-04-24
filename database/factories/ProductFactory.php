@@ -12,7 +12,7 @@ class ProductFactory extends Factory
 {
     /**
      * Define the model's default state.
-     *
+     *not programmed in a while be back soon
      * @return array<string, mixed>
      */
 
