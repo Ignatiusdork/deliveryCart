@@ -13,7 +13,7 @@ class CartItem extends Model
         'cart_id', 'product_id', 'quantity', 'price',
     ];
 
-    // relatoinship
+    // relatoinship formthe cart
     public function cart() {
         return $this->belongsTo(Cart::class);
     }
