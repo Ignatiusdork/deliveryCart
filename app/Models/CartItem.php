@@ -13,7 +13,7 @@ class CartItem extends Model
         'cart_id', 'product_id', 'quantity', 'price',
     ];
 
-    // relatoinship for the cart
+    // relationship for the cart for easy mapping
     public function cart() {
         return $this->belongsTo(Cart::class);
     }
