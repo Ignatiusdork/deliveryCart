@@ -13,7 +13,7 @@ class Cart extends Model
         'user_id',
     ];
 
-    // relationsip
+    // relationsip between users and items in the cart
     public function user() {
         return $this->belongsTo(User::class);
     }
