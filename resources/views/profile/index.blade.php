@@ -1,15 +1,17 @@
 @extends('layouts.app')
 
-<div>
-    @section('content')
-        <h1>Products</h1>
+@section('content')
+<div class="container mx-auto px-4">
+    <h1 class="text-2xl font-bold mb-6">Products</h1>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         @foreach ($products as $product)
-            <div>
-                <h2>{{ $product->name }}</h2>
-                <p>{{ $product->description }}</p>
-                <p>Price: ${{ $product->price }}</p>
+            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out">
+                <h2 class="text-xl font-semibold mb-2">{{ $product->name }}</h2>
+                <p class="mb-2 text-gray-700">{{ $product->description }}</p>
+                <p class="text-lg font-bold">Price: ${{ $product->price }}</p>
             </div>
         @endforeach
-    @endsection
+    </div>
 </div>
+@endsection
 
