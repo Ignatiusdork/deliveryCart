@@ -15,5 +15,9 @@ class ProductController extends Controller
             $direction = $request->input('direction', 'asc');
             $query->orderBy($request->input('sort'), $direction);
         }
+
+        $products = $query->paginate(10);
+
+        return view('profile.index', ['products' => $products]);
     }
 }
