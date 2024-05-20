@@ -7,8 +7,7 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function index() {
-        $products = Product::all();
-        return view('profile.index', compact('products'));
+    public function index(Request $request) {
+        $query = Product::query();
     }
 }
