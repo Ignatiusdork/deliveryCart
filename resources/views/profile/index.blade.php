@@ -13,9 +13,9 @@
         @endforeach
     </div>
 
-    {{-- <div class="mt-6">
+    <div class="mt-6">
         {{ $products->links() }}
-    </div> --}}
+    </div>
 </div>
 @endsection
 
