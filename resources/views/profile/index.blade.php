@@ -6,7 +6,9 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         @foreach ($products as $product)
             <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out">
-                <h2 class="text-xl font-semibold mb-2">{{ $product->name }}</h2>
+                <a href="{{ route('products.show', $product->id) }}" class="block">
+                    <h2 class="text-xl font-semibold mb-2">{{ $product->name }}</h2>
+                </a>
                 <p class="mb-2 text-gray-700">{{ $product->description }}</p>
                 <p class="text-lg font-bold">Price: ${{ $product->price }}</p>
             </div>
