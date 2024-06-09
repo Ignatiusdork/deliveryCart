@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Session;
+use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
@@ -13,6 +13,6 @@ class CartController extends Controller
         $product = \App\Models\Product::find($id);
 
         //store the product in the session
-        $oldCart = $request->session()->get('cart', 'default');
+        $oldCart = Session::get('cart');
     }
 }
