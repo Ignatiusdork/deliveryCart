@@ -15,10 +15,10 @@ class CartController extends Controller
         //store the product in the session
         $oldCart = Session::get('cart');
 
-        $cart = new \Cart(
-            $oldCart? : [],
-            false
-        );
+        // $cart = new \Cart(
+        //     $oldCart? : [],
+        //     false
+        // );
 
         $cart->add(array());
     }
