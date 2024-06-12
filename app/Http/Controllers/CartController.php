@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use App\Models\Cart;
 
 class CartController extends Controller
 {
@@ -15,10 +16,10 @@ class CartController extends Controller
         //store the product in the session
         $oldCart = Session::get('cart');
 
-        // $cart = new \Cart(
-        //     $oldCart? : [],
-        //     false
-        // );
+        $cart = new Cart(
+            $oldCart? : [],
+            false,
+        );
 
         $cart->add(array());
     }
