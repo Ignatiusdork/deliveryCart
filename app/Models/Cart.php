@@ -13,6 +13,12 @@ class Cart extends Model
         'user_id',
     ];
 
+    public function __construct(array $items = [], $sessionKey = 'cart')
+    {
+        $this->items = $items;
+        $this->sessionKey = $sessionKey;
+    }
+
     // relationsip between users and items in the cart
     public function user() {
         return $this->belongsTo(User::class);
@@ -20,5 +26,10 @@ class Cart extends Model
 
     public function items() {
         return $this->hasMany(CartItem::class);
+    }
+
+    // Add items to cart
+    public function add($item, $quantity =1) {
+
     }
 }
