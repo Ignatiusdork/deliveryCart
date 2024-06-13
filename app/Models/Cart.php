@@ -62,4 +62,16 @@ class Cart extends Model
         return $total;
     }
 
+    //save cart to session
+    protected function saveSession()
+    {
+        session([$this->sessionKey => $this->items]);
+    }
+
+    // load cart from session
+    public function loadFromSession()
+    {
+        $this->items = session($this->sessionKey, []);
+    }
+
 }
