@@ -17,11 +17,14 @@ class CartController extends Controller
         //get old cart data from the session or initialize a new array
         $oldCart = Session::get('cart', []);
 
-        $cart = new Cart(
-            $oldCart? : [],
-            false,
-        );
+        // Initialize the Cart model with old cart data
+        $cart = new Cart($oldCart);
+        $cart->loadFromSession();
 
-        $cart->add(array());
+        // add the product to the cart
+        $cart->add(['id' => $product->id, 'price' => $product->price, 'name' =>  $product->name]);
+
+        //save the update cart back to the session
+        Session::put('cart', $cart->items);
     }
 }
