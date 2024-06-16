@@ -68,7 +68,7 @@ class Cart extends Model
         session([$this->sessionKey => $this->items]);
     }
 
-    // load cart from session
+    // load cart from the stored session
     public function loadFromSession()
     {
         $this->items = session($this->sessionKey, []);

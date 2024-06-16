@@ -22,9 +22,11 @@ class CartController extends Controller
         $cart->loadFromSession();
 
         // add the product to the cart
-        $cart->add(['id' => $product->id, 'price' => $product->price, 'name' =>  $product->name]);
+        $cart->add(['id' => $product->id, 'price' => $product->price, 'name' =>  $product->name, 'description' => $product->description]);
 
         //save the update cart back to the session
         Session::put('cart', $cart->items);
     }
+
+    
 }
