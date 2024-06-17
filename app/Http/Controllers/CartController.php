@@ -26,7 +26,26 @@ class CartController extends Controller
 
         //save the update cart back to the session
         Session::put('cart', $cart->items);
+
+        return redirect()->back()->with('success', 'Product added to cart successfully');
     }
 
-    
+    public function remove(Request $request, $id)
+    {
+        $oldcart = Session::get('cart', []);
+        $cart = new Cart($oldcart);
+        $cart->loadFromSession();
+
+        $cart->remove($id);
+
+        Session::put('cart', $cart->items);
+
+        return redirect()->back()->with('success', 'Product removed from cart sucessfully');
+    }
+
+    public function getTotal()
+
+    {
+        $oldCart = Session::get('cart', []);
+    }
 }

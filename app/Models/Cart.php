@@ -73,5 +73,5 @@ class Cart extends Model
     {
         $this->items = session($this->sessionKey, []);
     }
-
+    
 }
