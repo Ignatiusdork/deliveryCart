@@ -13,6 +13,8 @@ class Cart extends Model
         'user_id',
     ];
 
+    protected $items = [];
+
     public function __construct(array $items = [], $sessionKey = 'cart')
     {
         $this->items = $items;
@@ -62,6 +64,11 @@ class Cart extends Model
         return $total;
     }
 
+    public function view()
+    {
+        return $this->items;
+    }
+
     //save cart to session
     protected function saveSession()
     {
@@ -73,5 +80,5 @@ class Cart extends Model
     {
         $this->items = session($this->sessionKey, []);
     }
-    
+
 }
