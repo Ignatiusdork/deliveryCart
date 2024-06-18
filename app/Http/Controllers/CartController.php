@@ -44,8 +44,13 @@ class CartController extends Controller
     }
 
     public function getTotal()
-
     {
         $oldCart = Session::get('cart', []);
+        $cart = new Cart($oldCart);
+        $cart->loadFromSession();
+
+        $total = $cart->getTotal();
+
+        return view('cart.total', compact('total'));
     }
 }
