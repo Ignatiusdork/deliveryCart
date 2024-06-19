@@ -63,7 +63,8 @@ class Cart extends Model
 
         return $total;
     }
-
+    
+    // view items in cart
     public function view()
     {
         return $this->items;

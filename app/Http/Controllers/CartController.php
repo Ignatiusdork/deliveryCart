@@ -53,4 +53,15 @@ class CartController extends Controller
 
         return view('cart.total', compact('total'));
     }
+
+    public function viewCart()
+    {
+        $oldCart = Session::get('cart', []);
+        $cart = new Cart($oldCart);
+        $cart->loadFromSession();
+
+        $items = $cart->view();
+
+        return view('cart.view', compact('items'));
+    }
 }
