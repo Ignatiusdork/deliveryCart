@@ -21,10 +21,11 @@ class CartController extends Controller
         $cart = new Cart($oldCart);
         $cart->loadFromSession();
 
-        // add the product to the cart
-        $cart->add(['id' => $product->id, 'price' => $product->price, 'name' =>  $product->name, 'description' => $product->description]);
+        // get the quantity from the request
+        $quantity = $request->input('quantity', 1);
 
-        //save the update cart back to the session
+        // add the product to the cart
+        $cart->add(['id' => $product->id, 'price' => $product->price, 'name' =>  $product->name, 'description' => $product->description], $quantity);
         Session::put('cart', $cart->items);
 
         return redirect()->back()->with('success', 'Product added to cart successfully');
@@ -35,9 +36,7 @@ class CartController extends Controller
         $oldcart = Session::get('cart', []);
         $cart = new Cart($oldcart);
         $cart->loadFromSession();
-
         $cart->remove($id);
-
         Session::put('cart', $cart->items);
 
         return redirect()->back()->with('success', 'Product removed from cart sucessfully');
