@@ -26,4 +26,12 @@ class CartService
 
         $this->saveSession();
     }
+
+    public function remove(int $id)
+    {
+        if(isset($this->items[$id])) {
+            unset($this->items[$id]);
+            $this->saveSession();
+        }
+    }
 }
