@@ -34,4 +34,23 @@ class CartService
             $this->saveSession();
         }
     }
+
+    public function getTotal()
+    {
+        $total = 0;
+        foreach ($this->items as $cartItem) {
+            $total += $cartItem['items']['price'] * $cartItem['quantity'];
+        }
+        return $total;
+    }
+
+    public function view()
+    {
+        return $this->items;
+    }
+
+    protected function saveSession()
+    {
+        session([$this->sessionKey => $this->items]);
+    }
 }
