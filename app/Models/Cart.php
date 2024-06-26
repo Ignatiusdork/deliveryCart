@@ -13,14 +13,6 @@ class Cart extends Model
         'user_id',
     ];
 
-    protected $items = [];
-
-    public function __construct(array $items = [], $sessionKey = 'cart')
-    {
-        $this->items = $items;
-        $this->sessionKey = $sessionKey;
-    }
-
     // relationsip between users and items in the cart
     public function user() {
         return $this->belongsTo(User::class);
@@ -28,58 +20,6 @@ class Cart extends Model
 
     public function items() {
         return $this->hasMany(CartItem::class);
-    }
-
-    // Add items to cart
-    public function add($item, $quantity =1)
-    {
-        $id = $item['id'];
-
-        if (isset($this->items[$id])) {
-            $this->items[$id]['quantity'] += $quantity;
-        } else {
-            $this->items[$id] = ['item' => $item, 'quantity' => $quantity];
-        }
-
-        $this->saveSession();
-    }
-
-    // remove item from cart
-    public function remove($id)
-    {
-        if (isset($this->items[$id])) {
-            unset($this->items[$id]);
-            $this->saveSession();
-        }
-    }
-
-    //get total proce of the cart
-    public function getTotal()
-    {
-        $total = 0;
-        foreach ($this->items as $cartItems) {
-            $total += $cartItems['items']['price'] * $cartItems['quantity'];
-        }
-
-        return $total;
-    }
-    
-    // view items in cart
-    public function view()
-    {
-        return $this->items;
-    }
-
-    //save cart to session
-    protected function saveSession()
-    {
-        session([$this->sessionKey => $this->items]);
-    }
-
-    // load cart from the stored session
-    public function loadFromSession()
-    {
-        $this->items = session($this->sessionKey, []);
     }
 
 }

@@ -53,4 +53,10 @@ class CartService
     {
         session([$this->sessionKey => $this->items]);
     }
+    //load cart data from teh session
+
+    protected function loadFromSession()
+    {
+        $this->items = session($this->sessionKey, []);
+    }
 }
