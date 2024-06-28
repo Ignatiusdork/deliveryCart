@@ -20,10 +20,18 @@
                     <td>{{ $item['quantity'] }}</td>
                     <td>${{ $item['item']['price'] }}</td>
                     <td>${{ $item['item']['price'] * $item['quantity'] }}</td>
+                    <td>
+                        <form action="{{ route('cart.remove', $item['item']->id)}}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Remove</button>
+                        </form>
+                    </td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
+        
     @else
         <p>Your cart is empty.</p>
     @endif

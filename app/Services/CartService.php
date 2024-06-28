@@ -14,7 +14,7 @@ class CartService
     {
         $this->loadFromSession();
     }
-
+    
     public function add(Product $product, int $quantity = 1)
     {
         $id = $product->id;
@@ -53,8 +53,8 @@ class CartService
     {
         session([$this->sessionKey => $this->items]);
     }
-    //load cart data from teh session
 
+    //load cart data from the saved session
     protected function loadFromSession()
     {
         $this->items = session($this->sessionKey, []);
