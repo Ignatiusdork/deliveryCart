@@ -49,7 +49,8 @@ class CartController extends Controller
     {
 
         $items = $this->cartService->view();
+        $total = $this->cartService->getTotal();
 
-        return view('cart.view', compact('items'));
+        return view('cart.view', compact('items', 'total'));
     }
 }

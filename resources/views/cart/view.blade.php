@@ -12,6 +12,7 @@
                     <th>Price</th>
                     <th>Total</th>
                 </tr>
+                
             </thead>
             <tbody>
                 @foreach($items as $item)
@@ -31,7 +32,9 @@
                 @endforeach
             </tbody>
         </table>
-        
+        <div class="cart-total">
+            <h3>Toal Price: ${{ $total }}</h3>
+        </div>
     @else
         <p>Your cart is empty.</p>
     @endif

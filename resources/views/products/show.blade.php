@@ -10,6 +10,19 @@
     <p><strong>Price:</strong> ${{ $product->price }}</p>
     <!-- Add more product details as needed -->
 
+    <!-- Flash Messages -->
+    @if(session('success'))
+        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+            <span class="block sm:inline">{{ session('success') }}</span>
+        </div>
+    @endif
+
+    @if(session('error'))
+        <div class="bg-green-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+            <span class="block sm:inline">{{ session('error') }}</span>
+        </div>
+    @endif
+
     <div class="flex items-center mt-4">
         <button id="decrement" class="bg-gray-200 text-gray-700 px-4 py-2">-</button>
         <input type="text" id="quantity" value="1" class="mx-2 text-center w-12" readonly>
@@ -21,6 +34,13 @@
         <input type="hidden" name="quantity" id="formQuantity" value="1">
         <button type="submit" class="bg-blue-500 text-black px-4 py-2">Add to Cart</button>
     </form>
+
+    <!-- Display cart info and go to cart button -->
+    <div class="mt-4">
+        <p><strong>Items in Cart:</strong> {{ session('cart') ? count(session('cart'))  : 0 }}</p>
+        <a href="{{ route('cart.view') }}" class=""></a>
+    </div>
+
 </div>
 
 <script>
