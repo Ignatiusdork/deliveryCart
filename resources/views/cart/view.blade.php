@@ -11,16 +11,17 @@
                     <th>Quantity</th>
                     <th>Price</th>
                     <th>Total</th>
+                    <th>Actions</th>
                 </tr>
-                
+
             </thead>
             <tbody>
                 @foreach($items as $item)
                 <tr>
-                    <td>{{ $item['item']['name'] }}</td>
+                    <td>{{ $item['item']->name}}</td>
                     <td>{{ $item['quantity'] }}</td>
-                    <td>${{ $item['item']['price'] }}</td>
-                    <td>${{ $item['item']['price'] * $item['quantity'] }}</td>
+                    <td>${{ $item['item']->price }}</td>
+                    <td>${{ $item['item']->price * $item['quantity'] }}</td>
                     <td>
                         <form action="{{ route('cart.remove', $item['item']->id)}}" method="POST">
                             @csrf

@@ -26,7 +26,8 @@ class CartController extends Controller
             return redirect()->back()->with('error', 'Product not found');
         }
 
-        $this->cartService->add($product);
+        $quantity = $request->input('quantity', 1);
+        $this->cartService->add($product, $quantity);
 
         return redirect()->back()->with('success', 'Product added to cart successfully');
     }

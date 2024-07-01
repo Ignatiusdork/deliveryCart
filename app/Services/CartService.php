@@ -14,39 +14,45 @@ class CartService
     {
         $this->loadFromSession();
     }
-    
-    public function add(Product $product, int $quantity = 1)
+
+    public function add($product, int $quantity = 1)
     {
+        $cart = Session::get($this->sessionKey, []);
+
         $id = $product->id;
-        if (isset($this->items[$id])) {
-            $this->items[$id]['quantity'] += $quantity;
+
+        if (isset($cart[$id])) {
+            $cart[$id]['quantity'] += $quantity;
         } else {
-            $this->items[$id] = ['item' => $product, 'quantity' => $quantity];
+            $cart[$id] = ['item' => $product, 'quantity' => $quantity];
         }
 
-        $this->saveSession();
+        Session::put($this->sessionKey, $cart);
     }
 
     public function remove(int $id)
     {
-        if(isset($this->items[$id])) {
-            unset($this->items[$id]);
-            $this->saveSession();
+        $cart = Session::get($this->sessionKey, []);
+        if(isset($cart[$id])) {
+            unset($cart[$id]);
         }
+        Session::put($this->sessionKey, $cart);
     }
 
-    public function getTotal()
+    public function getTotal(): float
     {
+        $cart = Session::get($this->sessionKey, []);
         $total = 0;
-        foreach ($this->items as $cartItem) {
-            $total += $cartItem['items']['price'] * $cartItem['quantity'];
+
+        foreach ($cart as $cartItem) {
+            $total += $cartItem['items']->price * $cartItem['quantity'];
         }
         return $total;
     }
 
-    public function view()
+    public function view(): array
     {
-        return $this->items;
+        return Session::get($this->sessionKey, []);
     }
 
     protected function saveSession()

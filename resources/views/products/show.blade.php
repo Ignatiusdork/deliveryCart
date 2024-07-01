@@ -38,7 +38,7 @@
     <!-- Display cart info and go to cart button -->
     <div class="mt-4">
         <p><strong>Items in Cart:</strong> {{ session('cart') ? count(session('cart'))  : 0 }}</p>
-        <a href="{{ route('cart.view') }}" class=""></a>
+        <a href="{{ route('cart.view') }}" class="bg-green-500 text-black px-4 py-2 inline-block">Go to Cart</a>
     </div>
 
 </div>
