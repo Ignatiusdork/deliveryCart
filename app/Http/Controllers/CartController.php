@@ -29,6 +29,7 @@ class CartController extends Controller
         $quantity = $request->input('quantity', 1);
         $this->cartService->add($product, $quantity);
 
+        dd(Session::get('cart'));
         return redirect()->back()->with('success', 'Product added to cart successfully');
     }
 

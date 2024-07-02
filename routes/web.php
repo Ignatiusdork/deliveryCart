@@ -25,6 +25,7 @@ Route::get('/products/{product}', [ProductController::class, 'show'])->name('pro
 
 Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view');
 Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
+Route::post('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

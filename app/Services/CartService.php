@@ -45,7 +45,7 @@ class CartService
         $total = 0;
 
         foreach ($cart as $cartItem) {
-            $total += $cartItem['items']->price * $cartItem['quantity'];
+            $total += $cartItem['item']->price * $cartItem['quantity'];
         }
         return $total;
     }
@@ -57,12 +57,12 @@ class CartService
 
     protected function saveSession()
     {
-        session([$this->sessionKey => $this->items]);
+        Session::put($this->sessionKey, $this->items);
     }
 
     //load cart data from the saved session
     protected function loadFromSession()
     {
-        $this->items = session($this->sessionKey, []);
+        $this->items = Session::get($this->sessionKey, []);
     }
 }
