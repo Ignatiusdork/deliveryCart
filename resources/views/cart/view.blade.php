@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container mx-auto px-4 py-8 flex flex-col items-center">
-    <h1 class="text-3xl font-bold pt-6">Your Cart</h1>
+    <h1 class="text-3xl font-bold mb-6 pt-6">Your Cart</h1>
     @if(count($items) > 0)
         <table class="min-w-full bg-white border border-gray-200 w-3/4">
             <thead>

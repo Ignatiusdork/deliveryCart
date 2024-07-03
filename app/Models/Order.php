@@ -13,8 +13,12 @@ class Order extends Model
         'user_id', 'total', 'status',
     ];
 
-    // relationsips
+    // relationships
     public function user() {
         return $this->belongsTo(User::class);
+    }
+
+    public function orderItems() {
+        return $this->hasMany(OrderItem::class);
     }
 }
