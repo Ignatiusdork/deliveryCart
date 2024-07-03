@@ -29,7 +29,7 @@ class CartController extends Controller
         $quantity = $request->input('quantity', 1);
         $this->cartService->add($product, $quantity);
 
-        dd(Session::get('cart'));
+        //dd(Session::get('cart'));
         return redirect()->back()->with('success', 'Product added to cart successfully');
     }
 
@@ -49,7 +49,6 @@ class CartController extends Controller
 
     public function viewCart()
     {
-
         $items = $this->cartService->view();
         $total = $this->cartService->getTotal();
 

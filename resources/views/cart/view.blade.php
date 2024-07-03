@@ -23,10 +23,10 @@
                     <td>${{ $item['item']->price }}</td>
                     <td>${{ $item['item']->price * $item['quantity'] }}</td>
                     <td>
-                        <form action="{{ route('cart.remove', $item['item']->id)}}" method="POST">
+                        <form action="{{ route('cart.remove', $item['item']->id)}}" method="POST" style="display: inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Remove</button>
+                            <button type="submit" class="bg-red-500 text-white px-2 py-1 ml-4">Remove</button>
                         </form>
                     </td>
                 </tr>
