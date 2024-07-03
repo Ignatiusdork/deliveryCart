@@ -1,17 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <h1>Your Cart</h1>
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-6">Your Cart</h1>
     @if(count($items) > 0)
-        <table class="table">
+        <table class="min-w-full bg-white border border-gray-200">
             <thead>
-                <tr>
-                    <th>Product</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                    <th>Total</th>
-                    <th>Actions</th>
+                <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                    <th class="py-3 px-6 text-left">Product</th>
+                    <th class="py-3 px-6 text-center">Quantity</th>
+                    <th class="py-3 px-6 text-center">Price</th>
+                    <th class="py-3 px-6 text-center">Total</th>
+                    <th class="py-3 px-6 text-center">Actions</th>
                 </tr>
 
             </thead>
