@@ -22,7 +22,7 @@ class OrderController extends Controller
     public function placeOrder()
     {
         $items = $this->cartService->view();
-        if (count($items) === 0) {
+        if (count($items) == 0) {
             return redirect()->route('cart.view')->with('error', 'Your cart is empty');
         }
 
@@ -44,5 +44,12 @@ class OrderController extends Controller
         }
 
         return view('orders.show', compact('order'));
+    }
+
+    public function listOrders()
+    {
+        $orders = $this->orderService->getUserOrders();
+
+        return view('orders.index', compact('orders'));
     }
 }
