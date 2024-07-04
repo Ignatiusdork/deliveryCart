@@ -8,7 +8,7 @@ use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 
 class OrderService
- {
+{
     public function placeOrder($items, $totalPrice)
     {
         $order = Order::create(([
@@ -39,9 +39,9 @@ class OrderService
     {
         return Order::with('orderItems.product')->findOrFail($id);
     }
-    
+
     public function getUserOrders()
     {
         return Order::where('user_id', Auth::id())->get();
     }
- }
+}

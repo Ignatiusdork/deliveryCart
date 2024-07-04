@@ -55,6 +55,12 @@ class CartService
         return Session::get($this->sessionKey, []);
     }
 
+    public function clear()
+    {
+        $this->items = [];
+        $this->saveSession();
+    }
+
     protected function saveSession()
     {
         Session::put($this->sessionKey, $this->items);

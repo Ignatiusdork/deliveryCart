@@ -21,6 +21,28 @@ class OrderController extends Controller
 
     public function placeOrder()
     {
+        $items = $this->cartService->view();
+        if (count($items) === 0) {
+            return redirect()->route('cart.view')->with('error', 'Your cart is empty');
+        }
 
+        $totalPrice = $this->cartService->getTotal();
+        $order = $this->orderService->placeOrder(Auth::user()->id, $totalPrice);
+
+        // clear the cart
+        $this->cartService->clear();
+
+        return redirect()->route('orders.show', $order->id)->with('success', 'Order placed successfully');
+    }
+
+    public function showOrder($id)
+    {
+        $order = $this->orderService->getOrder($id);
+
+        if ($order->user_id != Auth::id()) {
+            return redirect()->route('welcome')->with('error', 'You do not have access to this order.');
+        }
+
+        return view('orders.show', compact('order'));
     }
 }
