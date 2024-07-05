@@ -52,4 +52,12 @@ class OrderController extends Controller
 
         return view('orders.index', compact('orders'));
     }
+
+    public function update(Request $request, $orderId)
+    {
+        $status = $request->input('status');
+        $order = $this->orderService->updateOrderStatus($orderId, $status);
+
+        return redirect()->route('orders.index')->with('success', 'Order status updated successfully');
+    }
 }

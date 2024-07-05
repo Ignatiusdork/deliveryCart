@@ -25,12 +25,14 @@ class OrderService
                 'price' => $items['item']->price,
         ]);
 
-        // update product stock
+        //update product stock
         $product = Product::find($item['item']->id);
         $product->stock -= $item['quantity'];
         $product->save();
 
         }
+
+        dd($order);
 
         return $order;
     }
@@ -44,4 +46,14 @@ class OrderService
     {
         return Order::where('user_id', Auth::id())->get();
     }
+
+    public function updateOrderStatus($orderId, $status)
+    {
+        $order = Order::findOrFail($orderId);
+        $order->status = $status;
+        $order->save();
+
+        return $order;
+    }
+
 }

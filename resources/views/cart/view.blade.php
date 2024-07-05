@@ -36,6 +36,12 @@
         <div class="cart-total mt-6 w-3/4 text-right">
             <h3 class="text-xl font-semibold">Total Price: ${{ $total }}</h3>
         </div>
+        <div class="mt-6 w-3/4 text-right">
+            <form action="{{ route('order.place') }}" method="POST">
+                @csrf
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2">Place Order</button>
+            </form>
+        </div>
     @else
         <p>Your cart is empty.</p>
     @endif
