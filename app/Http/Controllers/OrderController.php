@@ -13,26 +13,30 @@ class OrderController extends Controller
     protected $orderService;
     protected $cartService;
 
-    public function __construct(OrderService $orderService, CartService $cartService)
+    public function placeOrder(OrderService $orderService, CartService $cartService)
     {
         $this->orderService = $orderService;
         $this->cartService = $cartService;
-    }
 
-    public function placeOrder()
-    {
         $items = $this->cartService->view();
         if (count($items) == 0) {
             return redirect()->route('cart.view')->with('error', 'Your cart is empty');
         }
 
         $totalPrice = $this->cartService->getTotal();
-        $order = $this->orderService->placeOrder(Auth::user()->id, $totalPrice);
 
-        // clear the cart
-        $this->cartService->clear();
+        try {
+            $order = $this->orderService->placeOrder(Auth::user()->id, $totalPrice);
 
-        return redirect()->route('orders.show', $order->id)->with('success', 'Order placed successfully');
+            // Clear the cart
+            $this->cartService->clear();
+
+            return redirect()->route('orders.show', $order->id)->with('success', 'Order placed successfully');
+            
+        } catch (\Exception $e) {
+            // Log the exception or show an error page
+            return back()->with('error', 'An error occurred while placing the order.');
+        }
     }
 
     public function showOrder($id)

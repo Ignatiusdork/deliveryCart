@@ -14,13 +14,18 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->singleton(OrderService::class, function ($app) {
-            return new OrderService();
+            return new OrderService($app->make(CartService::class));
+
         });
 
         $this->app->singleton(CartService::class, function ($app) {
             return new CartService();
         });
+
+
     }
+
+
 
     /**
      * Bootstrap any application services.

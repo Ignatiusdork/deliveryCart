@@ -55,6 +55,21 @@ class CartService
         return Session::get($this->sessionKey, []);
     }
 
+    public function getAllItems(): array
+    {
+        $cartItems = $this->view();
+
+        // transform the cart items into the desired format
+        $formattedItems = array_map(function ($item) {
+            return [
+                'item' => $item['item'],
+                'quantity' => $item['quantity']
+            ];
+        }, $cartItems);
+
+        return $formattedItems;
+    }
+
     public function clear()
     {
         $this->items = [];

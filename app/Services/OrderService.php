@@ -9,20 +9,29 @@ use Illuminate\Support\Facades\Auth;
 
 class OrderService
 {
+    protected $cartService;
+
+    public function __construct(CartService $cartService)
+    {
+        $this->cartService = $cartService;
+    }
+
     public function placeOrder($items, $totalPrice)
     {
-        $order = Order::create(([
+        dd($items);
+
+        $order = Order::create([
             'user_id' => Auth::id(),
             'status' => 'Pending',
             'total' => $totalPrice,
-        ]));
+        ]);
 
         foreach ($items as $item) {
             OrderItem::create([
                 'order_id' => $order->id,
-                'product_id' => $item['id'],
+                'product_id' => $item['item']->id,
                 'quantity' => $item['quantity'],
-                'price' => $items['item']->price,
+                'price' => $item['item']->price,
         ]);
 
         //update product stock
@@ -32,7 +41,7 @@ class OrderService
 
         }
 
-        dd($order);
+        //dd($order);
 
         return $order;
     }
