@@ -39,7 +39,7 @@
         <div class="mt-6 w-3/4 text-right">
             <form action="{{ route('order.place') }}" method="POST">
                 @csrf
-                <button type="submit" class="bg-blue-500 text-white px-4 py-2">Place Order</button>
+                <button type="submit" class="bg-blue-500 text-black px-4 py-2">Place Order</button>
             </form>
         </div>
     @else

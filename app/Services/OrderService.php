@@ -16,9 +16,19 @@ class OrderService
         $this->cartService = $cartService;
     }
 
-    public function placeOrder($items, $totalPrice)
+    public function placeOrder()
     {
-        dd($items);
+       // Fetch cart items from CartService view method
+       $items = $this->cartService->view();
+
+       //dd($items);
+
+       // handle if cart is empty
+       if (empty($items)) {
+        return null;
+       }
+
+       $totalPrice = $this->cartService->getTotal();
 
         $order = Order::create([
             'user_id' => Auth::id(),
@@ -32,16 +42,16 @@ class OrderService
                 'product_id' => $item['item']->id,
                 'quantity' => $item['quantity'],
                 'price' => $item['item']->price,
-        ]);
-
-        //update product stock
-        $product = Product::find($item['item']->id);
-        $product->stock -= $item['quantity'];
-        $product->save();
+            ]);
 
         }
 
-        //dd($order);
+        // Update product stock after all items have been ordered
+        foreach ($items as $item) {
+            $product = Product::find($item['item']->id);
+            $product->stock -= $item['quantity'];
+            $product->save();
+        }
 
         return $order;
     }

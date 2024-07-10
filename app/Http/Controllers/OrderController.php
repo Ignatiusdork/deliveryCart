@@ -13,10 +13,14 @@ class OrderController extends Controller
     protected $orderService;
     protected $cartService;
 
-    public function placeOrder(OrderService $orderService, CartService $cartService)
+    public function __construct(OrderService $orderService, CartService $cartService)
     {
         $this->orderService = $orderService;
         $this->cartService = $cartService;
+    }
+
+    public function placeOrder(Request $request)
+    {
 
         $items = $this->cartService->view();
         if (count($items) == 0) {
@@ -32,7 +36,7 @@ class OrderController extends Controller
             $this->cartService->clear();
 
             return redirect()->route('orders.show', $order->id)->with('success', 'Order placed successfully');
-            
+
         } catch (\Exception $e) {
             // Log the exception or show an error page
             return back()->with('error', 'An error occurred while placing the order.');

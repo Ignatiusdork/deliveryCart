@@ -4,6 +4,7 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\Session;
 use App\Models\Product;
+use Nette\InvalidArgumentException;
 
 class CartService
 {
@@ -15,8 +16,9 @@ class CartService
         $this->loadFromSession();
     }
 
-    public function add($product, int $quantity = 1)
+    public function add(Product $product, int $quantity = 1)
     {
+
         $cart = Session::get($this->sessionKey, []);
 
         $id = $product->id;
@@ -52,22 +54,9 @@ class CartService
 
     public function view(): array
     {
-        return Session::get($this->sessionKey, []);
-    }
+        $items = Session::get($this->sessionKey, []);
 
-    public function getAllItems(): array
-    {
-        $cartItems = $this->view();
-
-        // transform the cart items into the desired format
-        $formattedItems = array_map(function ($item) {
-            return [
-                'item' => $item['item'],
-                'quantity' => $item['quantity']
-            ];
-        }, $cartItems);
-
-        return $formattedItems;
+        return $items;
     }
 
     public function clear()
