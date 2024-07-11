@@ -23,22 +23,20 @@ class OrderController extends Controller
     {
 
         $items = $this->cartService->view();
-        if (count($items) == 0) {
+
+        if (empty($items)) {
             return redirect()->route('cart.view')->with('error', 'Your cart is empty');
         }
 
-        $totalPrice = $this->cartService->getTotal();
-
         try {
-            $order = $this->orderService->placeOrder(Auth::user()->id, $totalPrice);
 
-            // Clear the cart
+            $order = $this->orderService->placeOrder();
+
             $this->cartService->clear();
 
-            return redirect()->route('orders.show', $order->id)->with('success', 'Order placed successfully');
-
+            // Redirect to the order detail page, assuming 'orders.show' route expects an order ID
+            return redirect()->route('orders.show', $order->id)->with('sucess', 'Order placed successfully');
         } catch (\Exception $e) {
-            // Log the exception or show an error page
             return back()->with('error', 'An error occurred while placing the order.');
         }
     }

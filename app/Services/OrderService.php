@@ -43,7 +43,6 @@ class OrderService
                 'quantity' => $item['quantity'],
                 'price' => $item['item']->price,
             ]);
-
         }
 
         // Update product stock after all items have been ordered
