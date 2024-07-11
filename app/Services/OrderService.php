@@ -68,8 +68,7 @@ class OrderService
     public function updateOrderStatus($orderId, $status)
     {
         $order = Order::findOrFail($orderId);
-        $order->status = $status;
-        $order->save();
+        $order->update(['status' => $status]);
 
         return $order;
     }
