@@ -11,22 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('orders', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->decimal('total', 8, 2);
+        Schema::table('orders', function (Blueprint $table) {
             $table->string('status')->default('pending');
-            $table->timestamps();
         });
     }
 
     /**
      * Reverse the migrations.
-    */
+     */
     public function down(): void
     {
         Schema::table('orders', function (Blueprint $table) {
-            // Reverse the change made in the up() method
             $table->dropColumn('status');
         });
     }

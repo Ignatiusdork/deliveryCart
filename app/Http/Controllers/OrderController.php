@@ -59,6 +59,12 @@ class OrderController extends Controller
         return view('orders.index', compact('orders'));
     }
 
+    public function markAsShipped($orderId)
+    {
+        $order = $this->orderService->updateOrderStatus($orderId, 'shipped');
+        return redirect()->route('orders.index')->with('success', 'Order marked as shipped');
+    }
+
     public function update(Request $request, $orderId)
     {
         $status = $request->input('status');
