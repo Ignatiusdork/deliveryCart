@@ -15,16 +15,19 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->decimal('total', 8, 2);
-            $table->string('status')->default('pending');
+            $table->string('status')->default('pending')->change();
             $table->timestamps();
         });
     }
 
     /**
      * Reverse the migrations.
-     */
+    */
     public function down(): void
     {
-        Schema::dropIfExists('orders');
+        Schema::table('orders', function (Blueprint $table) {
+            // Reverse the change made in the up() method
+            $table->string('status')->default(null)->change();
+        });
     }
 };
