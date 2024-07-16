@@ -21,6 +21,7 @@ class OrderController extends Controller
 
     public function placeOrder(Request $request)
     {
+        //dd('Place Order Method Hit', $request->all());
 
         $items = $this->cartService->view();
 
@@ -36,6 +37,7 @@ class OrderController extends Controller
 
             // Redirect to the order detail page, assuming 'orders.show' route expects an order ID
             return redirect()->route('orders.show', $order->id)->with('sucess', 'Order placed successfully');
+
         } catch (\Exception $e) {
             return back()->with('error', 'An error occurred while placing the order.');
         }
@@ -52,6 +54,7 @@ class OrderController extends Controller
         return view('orders.show', compact('order'));
     }
 
+    //list orders 
     public function listOrders()
     {
         $orders = $this->orderService->getUserOrders();

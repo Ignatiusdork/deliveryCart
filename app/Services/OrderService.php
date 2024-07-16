@@ -51,12 +51,14 @@ class OrderService
             $product->stock -= $item['quantity'];
             $product->save();
         }
+        dd($order);
 
         return $order;
     }
 
     public function getOrder($id)
     {
+
         return Order::with('orderItems.product')->findOrFail($id);
     }
 
@@ -72,5 +74,4 @@ class OrderService
 
         return $order;
     }
-
 }

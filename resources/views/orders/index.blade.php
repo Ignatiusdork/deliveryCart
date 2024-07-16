@@ -10,7 +10,6 @@
                     <th class="py-3 px-6 text-left">Order ID</th>
                     <th class="py-3 px-6 text-left">Status</th>
                     <th class="py-3 px-6 text-left">Total Price</th>
-                    <th class="py-3 px-6 text-center">Actions</th>
                 </tr>
             </thead>
             <tbody class="text-gray-600 text-sm font-light">
