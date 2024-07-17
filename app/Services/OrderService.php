@@ -18,8 +18,9 @@ class OrderService
 
     public function placeOrder()
     {
-       // Fetch cart items from CartService view method
+       // Fetch cart items from CartService and the totalprice
        $items = $this->cartService->view();
+       $totalPrice = $this->cartService->getTotal();
 
        //dd($items);
 
@@ -27,8 +28,6 @@ class OrderService
        if (empty($items)) {
         return null;
        }
-
-       $totalPrice = $this->cartService->getTotal();
 
         $order = Order::create([
             'user_id' => Auth::id(),
@@ -51,7 +50,7 @@ class OrderService
             $product->stock -= $item['quantity'];
             $product->save();
         }
-        dd($order);
+        //dd($order);
 
         return $order;
     }

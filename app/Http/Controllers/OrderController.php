@@ -7,6 +7,7 @@ use App\Services\CartService;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class OrderController extends Controller
 {
@@ -36,9 +37,11 @@ class OrderController extends Controller
             $this->cartService->clear();
 
             // Redirect to the order detail page, assuming 'orders.show' route expects an order ID
-            return redirect()->route('orders.show', $order->id)->with('sucess', 'Order placed successfully');
+            return redirect()->route('orders.show', $order->id)->with('success', 'Order placed successfully');
 
         } catch (\Exception $e) {
+            Log::error('Error placing order: ' . $e->getMessage());
+
             return back()->with('error', 'An error occurred while placing the order.');
         }
     }
@@ -54,7 +57,7 @@ class OrderController extends Controller
         return view('orders.show', compact('order'));
     }
 
-    //list orders 
+    //list orders
     public function listOrders()
     {
         $orders = $this->orderService->getUserOrders();

@@ -38,7 +38,14 @@
         </div>
         <div class="mt-6 w-3/4 text-right">
             <form action="{{ route('order.place') }}" method="POST">
+
                 @csrf
+                @foreach ($items as $item)
+                    <input type="hidden" name="items[{{ $loop->index }}][id]" value="{{ $item['item']->id }}">
+                    <input type="hidden" name="items[{{ $loop->index }}][quantity]" value="{{ $item['quantity'] }}">
+                    <input type="hidden" name="items[{{ $loop->index }}][price]" value="{{ $item['item']->price }}">
+                @endforeach
+                <input type="hidden" name="totalPrice" value="{{ $total }}">
                 <button type="submit" class="bg-blue-500 text-black px-4 py-2">Place Order</button>
             </form>
         </div>
