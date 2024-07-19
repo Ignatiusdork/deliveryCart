@@ -12,17 +12,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('order_items', function (Blueprint $table) {
-            //
+            $table->renameColumn('quanity', 'quantity');
         });
     }
 
     /**
      * Reverse the migrations.
-     */
+    */
+
     public function down(): void
     {
         Schema::table('order_items', function (Blueprint $table) {
-            //
+            $table->renameColumn('quantity', 'quanity');
         });
     }
 };
