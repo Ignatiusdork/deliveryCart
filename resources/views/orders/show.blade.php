@@ -4,7 +4,7 @@
 <div class="container mx-auto px-4 py-8">
     <h1 class="text-3xl font-bold mb-6">Order #{{ $order->id }}</h1>
     <p>Status: {{ $order->status }}</p>
-    <p>Total Price: ${{ $order->total_price }}</p>
+    <p>Total Price: ${{ $order->total }}</p>
     <table class="min-w-full bg-white border border-gray-200 mt-6">
         <thead>
             <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">

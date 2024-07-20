@@ -17,9 +17,9 @@
                 <tr class="border-b border-gray-200 hover:bg-gray-100">
                     <td class="py-3 px-6 text-left whitespace-nowrap">#{{ $order->id }}</td>
                     <td class="py-3 px-6 text-left">{{ $order->status }}</td>
-                    <td class="py-3 px-6 text-left">${{ $order->total_price }}</td>
+                    <td class="py-3 px-6 text-left">${{ $order->total }}</td>
                     <td class="py-3 px-6 text-center">
-                        <a href="{{ route('orders.show', $order->id) }}" class="bg-blue-500 text-white px-4 py-2 rounded">View</a>
+                        <a href="{{ route('orders.show', $order->id) }}" class="bg-blue-500 text-black px-4 py-2 rounded">View</a>
                     </td>
                 </tr>
                 @endforeach
