@@ -21,8 +21,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/products', [ProductController::class, 'index']);
-Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
+Route::get('dashboard/products', [ProductController::class, 'index']);
+Route::get('dashboard/products/{product}', [ProductController::class, 'show'])->name('products.show');
 
 Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view');
 Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
