@@ -13,7 +13,7 @@
                 <th class="py-3 px-6 text-center">Price</th>
                 <th class="py-3 px-6 text-center">Total</th>
                 <th class="py-3 px-6 text-center">Status</th>
-                <th class="py-3 px-6 text-center"></th>
+                
             </tr>
         </thead>
         <tbody class="text-gray-600 text-sm font-light">

@@ -24,7 +24,7 @@ Route::get('/', function () {
 Route::get('dashboard/products', [ProductController::class, 'index']);
 Route::get('dashboard/products/{product}', [ProductController::class, 'show'])->name('products.show');
 
-Route::get('dashboard/cart', [CartController::class, 'viewCart'])->name('cart.view');
+Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view');
 Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
 Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
 
