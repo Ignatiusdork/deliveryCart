@@ -22,8 +22,6 @@ class OrderService
        $items = $this->cartService->view();
        $totalPrice = $this->cartService->getTotal();
 
-       //dd($items);
-
        // handle if cart is empty
        if (empty($items)) {
         return null;
