@@ -8,9 +8,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+use Laravel\Cashier\Billable;
+
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, Billable;
 
     /**
      * The attributes that are mass assignable.
@@ -43,13 +45,13 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    // to create cart/orders model
+    // to create orders objects
 
     public function orders() {
         return $this->hasMany(Order::class);
     }
 
-    // to create cart/orders model
+    // to create cart object
     public function cart() {
         return $this->hasOne(Cart::class);
     }
