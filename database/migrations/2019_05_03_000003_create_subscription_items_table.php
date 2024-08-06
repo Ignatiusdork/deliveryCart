@@ -8,6 +8,7 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     * using collate for case sentitive entries in stripe_id
      */
     public function up(): void
     {
