@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,4 +17,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::post('/stripe/webhook', function (Request $request) {
+    // Handle webhook event
+    Log::info('Received Stripe webhook event', $request->all());
+
+    // Return a 200 OK response to Stripe
+    return response()->json(['status' => 'success'], 200);
 });
