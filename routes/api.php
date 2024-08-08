@@ -20,7 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/stripe/webhook', function (Request $request) {
-    // Handle webhook event
+    // Handle webhook event for stripe
     Log::info('Received Stripe webhook event', $request->all());
 
     // Return a 200 OK response to Stripe
