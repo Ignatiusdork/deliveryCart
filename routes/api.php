@@ -23,6 +23,10 @@ Route::middleware('auth:sanctum')->get('/users', function (Request $request) {
     return $request->user();
 });
 
+Route::middleware('auth:sanctum')->get('/subscription', function (Request $request) {
+    return $request->user();
+});
+
 Route::post('/stripe/webhook', function (Request $request) {
     // Handle webhook event for stripe
     Log::info('Received Stripe webhook event', $request->all());
