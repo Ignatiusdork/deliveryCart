@@ -4,6 +4,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StripePaymentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,6 +41,12 @@ Route::middleware(['auth', 'is_admin'])->group(function () {
     Route::post('/orders/{order}/status', [OrderController::class, 'update'])->name('orders.updateStatus');
     Route::patch('/orders/{orderId}/shipped', [OrderController::class, 'markAsShipped'])->name('orders.markAsShipped');
     Route::patch('/orders/{orderId}/delivered', [OrderController::class, 'markAsDelivered'])->name('orders.markAsDelivered');
+});
+
+// Route for stripe integration
+Route::controller(StripePaymentController::class)->group(function(){
+    Route::get('stripe', 'stripe');
+    Route::post('stripe', 'stripePost')->name('stripe.post');
 });
 
 Route::get('/dashboard', function () {
