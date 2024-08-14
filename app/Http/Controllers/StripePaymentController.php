@@ -31,12 +31,6 @@ class StripePaymentController extends Controller
         return view('stripe.show', compact("total"));
     }
 
-    /**
-    * success response method.
-    *
-    * @return \Illuminate\Http\Response
-    */
-
     public function stripePost(Request $request, $total)
     {
         Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
