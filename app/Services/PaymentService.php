@@ -55,9 +55,20 @@ class PaymentService {
             OrderItem::create([
                 'order_id' => $order->id,
                 'product_id' => $item['item']->id,
+                'quantity' => $items['quantity'],
+                'price' => $item['item']
             ]);
         }
-    }
 
+        // update product stock after all items has been ordered
+        foreach ($items as $item) {
+            $product = Product::find($item['item']->id);
+            $product->stock -= $item['quantity'];
+            $product->save();
+        }
+
+        Session::flash('success', 'Payment Successful!');
+        return back();
+    }
 
 }
