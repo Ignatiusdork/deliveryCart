@@ -25,7 +25,7 @@ class PaymentService {
         $this->cartService = $cartService;
     }
 
-    public function charge($total, $token)
+    public function processStripePayment($total, $token)
     {
         Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
 

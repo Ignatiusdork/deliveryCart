@@ -19,11 +19,11 @@ class StripePaymentController extends Controller
     * @return \Illuminate\Http\Response
     */
 
-    protected $cartService;
+    protected $paymentService;
 
-    public function __construct(CartService $cartService)
+    public function __construct(PaymentService $paymentService)
     {
-        $this->cartService = $cartService;
+        $this->$paymentService = $paymentService;
     }
 
     public function stripe($total)
@@ -33,43 +33,6 @@ class StripePaymentController extends Controller
 
     public function stripePost(Request $request, $total)
     {
-        Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
-
-        Stripe\Charge::create([
-            "amount" => $total * 100,
-            "currency" => "usd",
-            "source" => $request->stripeToken,
-            "description" => "Test payment from littcart"
-        ]);
-
-       // Fetch cart items from CartService and the totalprice
-       $items = $this->cartService->view();
-       $totalPrice = $this->cartService->getTotal();
-
-        $order = Order::create([
-            'user_id' => Auth::id(),
-            'status' => 'Paid',
-            'total' => $totalPrice,
-        ]);
-
-        foreach ($items as $item) {
-            OrderItem::create([
-                'order_id' => $order->id,
-                'product_id' => $item['item']->id,
-                'quantity' => $item['quantity'],
-                'price' => $item['item']->price,
-            ]);
-        }
-
-        // Update product stock after all items have been ordered
-        foreach ($items as $item) {
-            $product = Product::find($item['item']->id);
-            $product->stock -= $item['quantity'];
-            $product->save();
-        }
-
-        Session::flash('success', 'Payment successful!');
-
-        return back();
+        return $this->paymentService->processStripePayment($total, $request);
     }
 }
