@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Services;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
@@ -67,7 +67,7 @@ class PaymentService {
             $product->save();
         }
 
-        Session::flash('success', 'Payment Successful!');
+        Session::flash('success', 'Payment Successfull!');
         return back();
     }
 

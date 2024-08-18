@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Services\CartService;
 use App\Services\OrderService;
+use App\Services\PaymentService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -22,10 +23,10 @@ class AppServiceProvider extends ServiceProvider
             return new CartService();
         });
 
-
+        // $this->app->singleton(PaymentService::class, function ($app) {
+        //     return new PaymentService();
+        // });
     }
-
-
 
     /**
      * Bootstrap any application services.

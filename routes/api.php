@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PaymentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
@@ -19,18 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware('auth:sanctum')->get('/users', function (Request $request) {
-    return $request->user();
-});
-
-Route::middleware('auth:sanctum')->get('/subscription', function (Request $request) {
-    return $request->user();
-});
-
-Route::post('/stripe/webhook', function (Request $request) {
-    // Handle webhook event for stripe
-    Log::info('Received Stripe webhook event', $request->all());
-
-    // Return a 200 OK response to Stripe
-    return response()->json(['status' => 'success'], 200);
+Route::group(['middleware' => ['auth'], 'prefix' => 'v1'], function () {
+    Route::get('/stripe/{total}', [PaymentController::class, 'stripe']);
+    Route::post('/stripe-post/{total}', [PaymentController::class, 'stripePost'])->name('stripe.post');
 });

@@ -3,15 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Product;
-use App\Models\Order;
-use App\Models\OrderItem;
-use App\Services\CartService;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
-use Stripe;
+use App\Services\PaymentService;
 
-class StripePaymentController extends Controller
+class PaymentController extends Controller
 {
     /**
     * success response method.
@@ -23,7 +17,7 @@ class StripePaymentController extends Controller
 
     public function __construct(PaymentService $paymentService)
     {
-        $this->$paymentService = $paymentService;
+        $this->paymentService = $paymentService;
     }
 
     public function stripe($total)

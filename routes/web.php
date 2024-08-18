@@ -4,8 +4,10 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\StripePaymentController;
+use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\PaymentService;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,9 +46,9 @@ Route::middleware(['auth', 'is_admin'])->group(function () {
 });
 
 // Route for stripe integration
-Route::controller(StripePaymentController::class)->group(function(){
-    Route::get('stripe/{total}', 'stripe');
-    Route::post('stripe/{total}', 'stripePost')->name('stripe.post');
+Route::middleware(['auth'])->group(function(){
+    Route::get('stripe/{total}',[PaymentController::class, 'stripe']);
+    Route::post('stripe/{total}', [PaymentController::class, 'stripePost'])->name('stripe.post');
 });
 
 Route::get('/dashboard', function () {

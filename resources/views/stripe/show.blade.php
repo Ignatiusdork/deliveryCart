@@ -32,8 +32,6 @@
 
                 <div class="panel-body">
 
-
-
                     @if (Session::has('success'))
 
                         <div class="alert alert-success text-center">
@@ -45,8 +43,6 @@
                         </div>
 
                     @endif
-
-
 
                     <form
                             role="form"
