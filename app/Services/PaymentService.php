@@ -19,6 +19,7 @@ use Stripe\Charge;
     */
 
 class PaymentService {
+    
     protected $cartService;
 
     public function __construct(CartService $cartService) {
@@ -70,5 +71,4 @@ class PaymentService {
         Session::flash('success', 'Payment Successfull!');
         return back();
     }
-
 }
