@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Services\CartService;
 use App\Services\PaymentService;
 
 class PaymentController extends Controller
@@ -13,10 +14,12 @@ class PaymentController extends Controller
     * @return \Illuminate\Http\Response
     */
 
+    protected $cartService;
     protected $paymentService;
 
-    public function __construct(PaymentService $paymentService)
+    public function __construct(CartService $cartService, PaymentService $paymentService)
     {
+        $this->cartService = $cartService;
         $this->paymentService = $paymentService;
     }
 
@@ -25,8 +28,13 @@ class PaymentController extends Controller
         return view('stripe.show', compact("total"));
     }
 
-    public function stripePost(Request $request, $total)
+    public function stripePost(Request $request)
+
     {
-        return $this->paymentService->processStripePayment($total, $request);
+        $total = $this->cartService->getTotal();
+        $token = $request->input('stripeToken');
+
+        return $this->paymentService->processStripePayment($total, $token);
     }
+
 }

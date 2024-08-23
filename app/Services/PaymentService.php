@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Services\CartService;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Stripe;
 use Stripe\Charge;
@@ -19,7 +20,7 @@ use Stripe\Charge;
     */
 
 class PaymentService {
-    
+
     protected $cartService;
 
     public function __construct(CartService $cartService) {
@@ -30,14 +31,23 @@ class PaymentService {
     {
         Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
 
-        Stripe\Charge::create([
-            "amount" => $total * 100,
-            "currency" => "usd",
-            "source" => $token,
-            "description" => "Test payment from littcart2"
-        ]);
+        $totalCents = $total * 100;
 
-        return true;
+        try {
+            Stripe\Charge::create([
+                "amount" => $totalCents,
+                "currency" => "usd",
+                "source" => $token,
+                "description" => "Test payment from littcart2"
+            ]);
+
+            $this->createOrder($total);
+
+        } catch (\Exception $e) {
+            Log::error('Error processing order:' . $e->getMessage());
+
+            return back()->with('error', 'Payment not completed.');
+        }
     }
 
     public function createOrder($total)
