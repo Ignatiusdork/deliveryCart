@@ -34,7 +34,17 @@ class PaymentController extends Controller
         $total = $this->cartService->getTotal();
         $token = $request->input('stripeToken');
 
-        return $this->paymentService->processStripePayment($total, $token);
-    }
+        try {
 
+            $this->paymentService->processStripePayment($total, $token);
+
+            // If processStripePayment doesn't throw an exception, redirect with success message
+            return redirect()->back()->with('success', 'Payment completed successfully');
+
+        } catch (\Exception $e) {
+            
+            // Handle payment failure, redirect back with error message
+            return redirect()->back()->with('error', 'Payment failed:' . $e->getMessage());
+        }
+    }
 }

@@ -46,7 +46,7 @@ class PaymentService {
         } catch (\Exception $e) {
             Log::error('Error processing order:' . $e->getMessage());
 
-            return back()->with('error', 'Payment not completed.');
+            throw new \Exception('error', 'Payment not completed.');
         }
     }
 
