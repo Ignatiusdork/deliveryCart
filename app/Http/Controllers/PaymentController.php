@@ -27,7 +27,7 @@ class PaymentController extends Controller
     {
         return view('stripe.show', compact("total"));
     }
-
+    
     public function stripePost(Request $request)
 
     {
@@ -42,7 +42,7 @@ class PaymentController extends Controller
             return redirect()->back()->with('success', 'Payment completed successfully');
 
         } catch (\Exception $e) {
-            
+
             // Handle payment failure, redirect back with error message
             return redirect()->back()->with('error', 'Payment failed:' . $e->getMessage());
         }

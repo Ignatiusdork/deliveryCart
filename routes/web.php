@@ -47,8 +47,8 @@ Route::middleware(['auth', 'is_admin'])->group(function () {
 
 // Route for stripe integration
 Route::middleware(['auth'])->group(function(){
-    Route::get('stripe/{total}',[PaymentController::class, 'stripe']);
-    Route::post('stripe/{total}', [PaymentController::class, 'stripePost'])->name('stripe.post');
+    Route::get('/stripe/{total}',[PaymentController::class, 'stripe']);
+    Route::post('/stripe/{total}', [PaymentController::class, 'stripePost'])->name('stripe.post');
 });
 
 Route::get('/dashboard', function () {
