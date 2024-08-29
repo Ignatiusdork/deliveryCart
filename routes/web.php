@@ -24,7 +24,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('dashboard/products', [ProductController::class, 'index']);
+Route::get('dashboard/products', [ProductController::class, 'index'])->name('products.index');
 Route::get('dashboard/products/{product}', [ProductController::class, 'show'])->name('products.show');
 
 Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view');
