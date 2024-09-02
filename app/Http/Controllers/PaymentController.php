@@ -15,6 +15,7 @@ class PaymentController extends Controller
     */
 
     protected $cartService;
+    
     protected $paymentService;
 
     public function __construct(CartService $cartService, PaymentService $paymentService)
@@ -27,7 +28,7 @@ class PaymentController extends Controller
     {
         return view('stripe.show', compact("total"));
     }
-    
+
     public function stripePost(Request $request)
 
     {
