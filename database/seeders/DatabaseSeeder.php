@@ -22,5 +22,10 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         // Product::factory()->count(30)->create();
+
+        $this->call([
+            PopulateTempUserIdSeeder::class,
+            UpdateNewUserIdSeeder::class,
+        ]);
     }
 }
