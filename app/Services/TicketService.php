@@ -46,5 +46,14 @@ class TicketService {
             'user_id' => auth()->id(),
             'message' => $data['message'],
         ]);
+
+        return $reply;
+    }
+
+    public function updateStatus(int $ticketId, string $newStatus) {
+
+        $validStatuses = ['open', 'closed', 'pending'];
+
+        
     }
 }
