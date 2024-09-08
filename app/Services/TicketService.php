@@ -54,6 +54,14 @@ class TicketService {
 
         $validStatuses = ['open', 'closed', 'pending'];
 
-        
+        if (!in_array(strtolower($newStatus), $validStatuses)) {
+            throw new \InvalidArgumentException('Invalid status. Must be one of:' . implode(', ', $validStatuses));
+        }
+
+        $ticket = $this->getTicketDetails($ticketId);
+        $ticket->update(['status' => strtolower($newStatus)]);
+        return $ticket;
     }
+
+    
 }
