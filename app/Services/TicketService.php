@@ -33,4 +33,18 @@ class TicketService {
         return Ticket::where('user_id', auth()->id())
             ->findOrFail($ticketId);
     }
+
+    public function replyToTicket(int $ticketId, array $data) {
+        Validator::make($data, [
+            'message' => 'required|string',
+        ])->validate();
+
+        $ticket = $this->getTicketDetails($ticketId);
+
+        $reply = TicketReply::create([
+            'ticket_id' => $ticketId,
+            'user_id' => auth()->id(),
+            'message' => $data['message'],
+        ]);
+    }
 }
