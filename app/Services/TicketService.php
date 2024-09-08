@@ -63,5 +63,15 @@ class TicketService {
         return $ticket;
     }
 
-    
+    public function closeTicket(int $ticketId) {
+        return $this->updateStatus($ticketId, 'closed');
+    }
+
+    public function getTicketStatuses() {
+        return [
+            'open' => 'Open',
+            'closed' => 'Closed',
+            'pending' => 'Pending',
+        ];
+    }
 }

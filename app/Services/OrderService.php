@@ -3,8 +3,11 @@
 namespace App\Services;
 
 use App\Models\Order;
+use App\Models\Invoice;
 use App\Models\OrderItem;
 use App\Models\Product;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 use Illuminate\Support\Facades\Auth;
 
 class OrderService
@@ -55,7 +58,6 @@ class OrderService
 
     public function getOrder($id)
     {
-
         return Order::with('orderItems.product')->findOrFail($id);
     }
 
@@ -70,5 +72,18 @@ class OrderService
         $order->update(['status' => $status]);
 
         return $order;
+    }
+
+    public function downloadInvoice($invoiceId) {
+
+        $invoice = Invoice::findOrFail($invoiceId);
+
+        //prepare invoice data
+        $data = [
+            'invoice' => $invoice,
+            'order' => $invoice->order,
+            'items' => $invoice->order->orderItems()->get(),
+        ];
+
     }
 }
