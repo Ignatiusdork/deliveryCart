@@ -28,4 +28,9 @@ class TicketService {
             ->latest()
             ->get();
     }
+
+    public function getTicketDetails(int $ticketId) {
+        return Ticket::where('user_id', auth()->id())
+            ->findOrFail($ticketId);
+    }
 }
