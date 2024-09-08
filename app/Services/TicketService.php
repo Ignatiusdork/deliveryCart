@@ -22,4 +22,10 @@ class TicketService {
 
         return $ticket;
     }
+
+    public function getTickets() {
+        return Ticket::where('user_id', auth()->id())
+            ->latest()
+            ->get();
+    }
 }
