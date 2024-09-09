@@ -8,6 +8,8 @@ use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\PaymentService;
+use App\Http\Controllers\TicketController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +24,11 @@ use App\Http\Controllers\PaymentService;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/account/overview/{id}', [UserController::class, 'accountOverview'])->name('account.overview');
+    Route::get('/invoices/{invoiceId}/download', [OrderController::class, 'downloadInvoice'])->name('invoices.download');
 });
 
 Route::get('dashboard/products', [ProductController::class, 'index'])->name('products.index');
@@ -49,6 +56,15 @@ Route::middleware(['auth', 'is_admin'])->group(function () {
 Route::middleware(['auth'])->group(function(){
     Route::get('/stripe/{total}',[PaymentController::class, 'stripe']);
     Route::post('/stripe/{total}', [PaymentController::class, 'stripePost'])->name('stripe.post');
+});
+
+//Route for tickets
+Route::middleware(['auth'])->group(function () {
+    Route::resource('tickets', TicketController::class)->except(['edit']);
+
+    Route::post('/tickets/{ticketId}/status', [TicketController::class, 'updateStatus'])->name('tickets.update-status');
+    Route::post('/tickets/{ticketId}/close', [TicketController::class, 'close'])->name('tickets.close');
+    Route::get('/tickets/statuses', [TicketController::class, 'getStatuses'])->name('tickets.statuses');
 });
 
 Route::get('/dashboard', function () {
