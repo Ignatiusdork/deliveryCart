@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Services\TicketService;
-
+use Exception;
 use Illuminate\Http\Request;
 
 class TicketController extends Controller
@@ -42,5 +42,36 @@ class TicketController extends Controller
         $reply = $this->ticketService->replyToTicket($ticketId, $request->all());
 
         return redirect()->back()>with('success', 'Reply added successfully');
+    }
+
+    public function updateStatus(Request $request, $ticketId) {
+
+        $newStatus = $request->input('status');
+
+        try {
+
+            $updatedTicket = $this->ticketService->updateStatus($ticketId, $newStatus);
+            return redirect()->back()->with('success', 'Ticket status updated successfully');
+
+        } catch (Exception $e){
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
+    }
+
+    public function close(Request $request, $ticketId) {
+        try {
+
+            $updateTicket = $this->ticketService->closeTicket($ticketId);
+            return redirect()->back()->with('success', 'Ticket closed successfully');
+
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
+    }
+
+    public function getStatuses() {
+
+        $statuses =  $this->ticketService->getTicketStatuses();
+        return view('tickets.statuses', compact('statuses'));
     }
 }
