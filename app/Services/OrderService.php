@@ -9,6 +9,7 @@ use App\Models\Product;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class OrderService
 {
@@ -85,5 +86,20 @@ class OrderService
             'items' => $invoice->order->orderItems()->get(),
         ];
 
+        //generate PDF
+        $pdf = Pdf::loadView('invoices.pdf', $data);
+
+        // set PDF options
+        $pdf->setPaper('A4');
+        $pdf->setOrientation('portrait');
+
+        // save the pdf to storage
+        $filename = 'invoice_' . $invoice->invoice_number . '.pdf';
+        Storage::put('public/invoices' . $filename, $pdf->output());
+
+        // return the PDF as a downloadble file
+        return response()->download(storage_path('app/public/invoices/' . $filename), $filename, [
+            'Content-Type' => 'application/pdf',
+        ]);
     }
 }
