@@ -18,8 +18,15 @@ class TicketController extends Controller
     }
 
     public function store(Request $request) {
+
         $ticket = $this->ticketService->createTicket($request->all());
 
         return redirect()->route('tickets.index')->with('success', 'Ticket created successfully');
+    }
+
+    public function index() {
+        $tickets = $this->ticketService->getTickets();
+
+        return view('tickets.index', compact('tickets'));
     }
 }
