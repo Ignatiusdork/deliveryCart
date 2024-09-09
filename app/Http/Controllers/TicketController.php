@@ -12,4 +12,12 @@ class TicketController extends Controller
     public function __construct(TicketService $ticketService) {
         $this->ticketService = $ticketService;
     }
+
+    public function create() {
+        return view('tickets.create');
+    }
+
+    public function store(Request $request) {
+        
+    }
 }
