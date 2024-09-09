@@ -84,4 +84,8 @@ class OrderController extends Controller
 
         return redirect()->route('orders.index')->with('success', 'Order status updated successfully');
     }
+
+    public function downloadInvoice($invoiceId) {
+        return $this->orderService->downloadInvoice($invoiceId);
+    }
 }
