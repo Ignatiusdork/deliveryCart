@@ -29,4 +29,18 @@ class TicketController extends Controller
 
         return view('tickets.index', compact('tickets'));
     }
+
+    public function show($ticketId) {
+
+        $ticket = $this->ticketService->getTicketDetails($ticketId);
+
+        return view('tickets.show', compact('ticket'));
+    }
+
+    public function reply(Request $request, $ticketId) {
+
+        $reply = $this->ticketService->replyToTicket($ticketId, $request->all());
+
+        return redirect()->back()>with('success', 'Reply added successfully');
+    }
 }
