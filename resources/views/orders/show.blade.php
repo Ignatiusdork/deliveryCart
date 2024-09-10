@@ -28,8 +28,15 @@
             @endforeach
         </tbody>
     </table>
-    
-    <a href="{{ route('invoices.download', $order->invoices->first()->id) }}">Download Invoice</a>
+
+    @if($order->invoices()->exists())
+
+        <a href="{{ route('invoices.download', $order->invoices->first()->id) }}">Download Invoice</a>
+    @else
+
+        <p>No invoice available for this order.</p>
+
+    @endif
 
 </div>
 @endsection
