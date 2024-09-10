@@ -20,7 +20,7 @@ class OrderService
         $this->cartService = $cartService;
     }
 
-    public function placeOrder()
+    public function placeOrder(array $data)
     {
        // Fetch cart items from CartService and the totalprice
        $items = $this->cartService->view();
@@ -33,8 +33,9 @@ class OrderService
 
         $order = Order::create([
             'user_id' => Auth::id(),
-            'status' => 'Pending',
+            'status' => $data['payment_method'] === 'pay_on_delivery' ? 'pending' : 'paid',
             'total' => $totalPrice,
+
         ]);
 
         foreach ($items as $item) {
