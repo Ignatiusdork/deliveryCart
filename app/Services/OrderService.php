@@ -88,6 +88,10 @@ class OrderService
         ]);
     }
 
+    private function generateInvoiceNumber() {
+        return 'INV-' . now()->format('YmdHis') . '-' . rand(10000, 99999);
+    }
+
     public function downloadInvoice($invoiceId) {
 
         $invoice = Invoice::findOrFail($invoiceId);
