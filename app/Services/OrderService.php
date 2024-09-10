@@ -55,6 +55,8 @@ class OrderService
         }
         //dd($order);
 
+        $this->createInvoice($order);
+
         return $order;
     }
 
@@ -74,6 +76,16 @@ class OrderService
         $order->update(['status' => $status]);
 
         return $order;
+    }
+
+    private function createInvoice(Order $order) {
+
+        Invoice::create([
+            'order_id' => $order->id,
+            'invoice_number' => $this->generateInvoiceNumber(),
+            'total' => $order->total,
+            'status' => $order->status,
+        ]);
     }
 
     public function downloadInvoice($invoiceId) {
