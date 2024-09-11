@@ -46,8 +46,10 @@
                     <input type="hidden" name="items[{{ $loop->index }}][price]" value="{{ $item['item']->price }}">
                 @endforeach
                 <input type="hidden" name="totalPrice" value="{{ $total }}">
-                <button type="submit" class="bg-blue-500 text-black px-4 py-2">Pay On Delivery</button>
+
+                <button type="submit" class="bg-blue-500 text-black px-4 py-2">{{ __('Pay On Delivery') }}</button>
                 <a class="btn btn-success" href="{{url('stripe', $total)}}">Pay Using Card</a>
+
             </form>
         </div>
     @else

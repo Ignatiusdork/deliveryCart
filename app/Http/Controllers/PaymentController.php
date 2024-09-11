@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Services\CartService;
 use App\Services\PaymentService;
+use App\Models\Order;
+use Stripe\Charge;
+use Stripe\Exception\InvalidRequestException;
 
 class PaymentController extends Controller
 {
@@ -15,7 +18,7 @@ class PaymentController extends Controller
     */
 
     protected $cartService;
-    
+
     protected $paymentService;
 
     public function __construct(CartService $cartService, PaymentService $paymentService)
@@ -48,4 +51,5 @@ class PaymentController extends Controller
             return redirect()->back()->with('error', 'Payment failed:' . $e->getMessage());
         }
     }
+
 }
