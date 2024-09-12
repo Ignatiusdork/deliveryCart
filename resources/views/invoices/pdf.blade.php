@@ -69,17 +69,28 @@
                 </tr>
             </thead>
             <tbody>
+
+                @php
+                    $total = 0;
+                @endphp
+
                 @foreach($items as $item)
                     <tr>
-                        <td>{{ $item->name }}</td>
+                        <td>{{ $item->product->name }}</td>
                         <td>{{ $item->quantity }}</td>
                         <td>${{ number_format($item->price, 2) }}</td>
-                        <td>${{ number_format($item->total, 2) }}</td>
+                        <td>${{ number_format($item->price * $item->quantity, 2) }}</td>
                     </tr>
+
+                    @php
+                        $total += $item->price * $item->quantity;
+                    @endphp
+
                 @endforeach
+
                 <tr>
                     <td colspan="3">Subtotal:</td>
-                    <td>${{ number_format($invoice->amount, 2) }}</td>
+                    <td>${{ number_format($invoice->total, 2) }}</td>
                 </tr>
                 {{-- <tr>
                     <td colspan="3">Tax ({{ config('app.tax_rate') }}%):</td>
@@ -87,7 +98,7 @@
                 </tr> --}}
                 <tr>
                     <td colspan="3">Total:</td>
-                    <td>${{ number_format($invoice->total_amount, 2) }}</td>
+                    <td>${{ number_format($invoice->total, 2) }}</td>
                 </tr>
             </tbody>
         </table>
