@@ -111,12 +111,7 @@ class OrderService
         $pdf->setOrientation('portrait');
 
         // save the pdf to storage
-        $filename = 'invoice_' . $invoice->invoice_number . '.pdf';
-        Storage::put('public/invoices' . $filename, $pdf->output());
+        return $pdf->download('invoice_' . $invoice->invoice_number . '.pdf');
 
-        // return the PDF as a downloadble file
-        return response()->download(storage_path('app/public/invoices/' . $filename), $filename, [
-            'Content-Type' => 'application/pdf',
-        ]);
     }
 }
