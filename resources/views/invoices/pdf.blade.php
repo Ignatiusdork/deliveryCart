@@ -81,10 +81,10 @@
                     <td colspan="3">Subtotal:</td>
                     <td>${{ number_format($invoice->amount, 2) }}</td>
                 </tr>
-                <tr>
+                {{-- <tr>
                     <td colspan="3">Tax ({{ config('app.tax_rate') }}%):</td>
                     <td>${{ number_format($invoice->tax_amount, 2) }}</td>
-                </tr>
+                </tr> --}}
                 <tr>
                     <td colspan="3">Total:</td>
                     <td>${{ number_format($invoice->total_amount, 2) }}</td>
