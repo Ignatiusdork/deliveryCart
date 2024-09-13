@@ -24,12 +24,6 @@ class OrderController extends Controller
     {
         //dd('Place Order Method Hit', $request->all());
 
-        // $validatedData = $request->validate([
-        //     'cart_contents' => 'required|array',
-        //     'payment_method' => 'required|string',
-        //     'delivery_address' => 'required_if:payment_method,pay_on_delivery|string',
-        // ]);
-
         $items = $this->cartService->view();
 
         if (empty($items)) {
@@ -39,7 +33,7 @@ class OrderController extends Controller
         try {
 
                 $order = $this->orderService->placeOrder();
-                
+
                 $this->cartService->clear();
 
                 // Redirect to the order detail page, assuming 'orders.show' route expects an order ID
