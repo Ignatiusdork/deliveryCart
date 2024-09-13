@@ -25,7 +25,6 @@ class PaymentService {
 
     public function __construct(CartService $cartService) {
         $this->cartService = $cartService;
-
     }
 
     public function processStripePayment($total, $token)

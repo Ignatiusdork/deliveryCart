@@ -48,12 +48,15 @@
 </head>
 <body>
     <div class="container">
+
         <img src="{{ asset('logo.png') }}" alt="Company Logo" class="logo">
 
         <h1>Invoice #{{ $invoice->invoice_number }}</h1>
 
         <p>Date: {{ $invoice->created_at->format('Y-m-d') }}</p>
+
         <p>Bill To:</p>
+
         <address>
             {{ $order->user->name }}<br>
             {{ $order->user->email }}
@@ -92,10 +95,7 @@
                     <td colspan="3">Subtotal:</td>
                     <td>${{ number_format($invoice->total, 2) }}</td>
                 </tr>
-                {{-- <tr>
-                    <td colspan="3">Tax ({{ config('app.tax_rate') }}%):</td>
-                    <td>${{ number_format($invoice->tax_amount, 2) }}</td>
-                </tr> --}}
+
                 <tr>
                     <td colspan="3">Total:</td>
                     <td>${{ number_format($invoice->total, 2) }}</td>

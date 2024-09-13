@@ -1,4 +1,3 @@
-
 <h1>Account Overview</h1>
 
 <p>Name: {{ $user->name }}</p>

@@ -35,7 +35,6 @@ class OrderService
             'user_id' => Auth::id(),
             'status' => 'pending',
             'total' => $totalPrice,
-
         ]);
 
         foreach ($items as $item) {
@@ -111,9 +110,6 @@ class OrderService
 
         //generate PDF
         $pdf = Pdf::loadView('invoices.pdf', $data);
-
-        // set PDF options
-        //$pdf->setPaper('A4', 'portrait');
 
         // save the pdf to storage
         return $pdf->download('invoice_' . $invoice->invoice_number . '.pdf');
