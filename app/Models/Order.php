@@ -9,7 +9,8 @@ class Order extends Model
 {
     use HasFactory;
 
-    
+    protected static $nextOrderNumber = 1;
+
     protected $fillable = [
         'user_id', 'total', 'status', 'order_number', 'payment_method'
     ];
@@ -25,5 +26,9 @@ class Order extends Model
 
     public function invoices() {
         return $this->hasMany(Invoice::class);
+    }
+
+    public function getOrderNumberAttribute() {
+        return str_pad(static::$nextOrderNumber++, 6, '0', STR_PAD_LEFT);
     }
 }

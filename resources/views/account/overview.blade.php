@@ -6,6 +6,6 @@
 <h2>Recent Orders:</h2>
 <ul>
     @foreach($orders as $order)
-        <li>{{ $order->order_number }} - {{ $order->status }}</li>
+        <li>{{ $order->id ?? 'N/A' }} - {{ $order->status }}</li>
     @endforeach
 </ul>
