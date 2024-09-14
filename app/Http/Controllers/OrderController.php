@@ -23,9 +23,7 @@ class OrderController extends Controller
     public function placeOrder(Request $request)
     {
         //dd('Place Order Method Hit', $request->all());
-
-        $items = $this->cartService->view();
-
+        
         if (empty($items)) {
             return redirect()->route('cart.view')->with('error', 'Your cart is empty');
         }
