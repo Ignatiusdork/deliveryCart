@@ -38,5 +38,7 @@
 
     @endif
 
+    <button type="submit" class="bg-blue-500 text-black px-4 py-2">{{ __('Account Overview') }}</button>
+
 </div>
 @endsection
