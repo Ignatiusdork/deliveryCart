@@ -5,7 +5,7 @@
             <a href="{{ route('products.index') }}" class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-3 px-6 rounded text-lg mt-4">
                 View Products
             </a>
-            <a href="{{ route('account.overview', auth()->id()) }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-3 px-6 rounded text-lg mt-4">
+            <a href="{{ route('account.overview', auth()->id()) }}" class="bg-green-500 hover:bg-green-700 text-black font-bold py-3 px-6 rounded text-lg mt-4">
                 Account Overview
             </a>
         </div>

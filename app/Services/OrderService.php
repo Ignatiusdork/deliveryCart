@@ -31,10 +31,14 @@ class OrderService
         return null;
        }
 
+       //generate order number
+       $orderNumber = Order::getNextOrderNumber();
+
         $order = Order::create([
             'user_id' => Auth::id(),
             'status' => 'pending',
             'total' => $totalPrice,
+            'order_number' => $orderNumber
         ]);
 
         foreach ($items as $item) {
@@ -58,6 +62,22 @@ class OrderService
         $this->createInvoice($order);
 
         return $order;
+    }
+
+    public function getNextOrderNumber() {
+
+        $latestOrder = Order::orderBy('created_at', 'desc')->first();
+        $currentYear = date('Y');
+        $currentMonth = date('m');
+
+        if (!$latestOrder || $latestOrder->year != $currentYear || $latestOrder->month != $currentMonth) {
+            return sprintf('%04d%s001', $currentYear, $currentMonth);
+        }
+
+        $lastNumber = intval($latestOrder->order_number);
+        $newNumber = $lastNumber + 1;
+
+        return sprintf('%06d', $newNumber);
     }
 
     public function getOrder($id)

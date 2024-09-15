@@ -12,7 +12,7 @@ class Order extends Model
     protected static $nextOrderNumber = 1;
 
     protected $fillable = [
-        'user_id', 'total', 'status', 'order_number', 'payment_method'
+        'user_id', 'total', 'status', 'order_number', 'payment_method', 'year', 'month'
     ];
 
     // relationships
