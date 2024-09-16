@@ -4,8 +4,9 @@
 <p>Email: {{ $user->email }}</p>
 
 <h2>Recent Orders:</h2>
+
 <ul>
     @foreach($orders as $order)
-        <li>{{ $order->id ?? 'N/A' }} - {{ $order->status }}</li>
+        <li>{{ $invoice->invoice_number ?? 'N/A' }} - {{ $order->status }}</li>
     @endforeach
 </ul>
