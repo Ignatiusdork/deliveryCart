@@ -23,19 +23,22 @@ class OrderController extends Controller
     public function placeOrder(Request $request)
     {
         //dd('Place Order Method Hit', $request->all());
-        
+
+        $items = session()->get('cart', []);
+
         if (empty($items)) {
             return redirect()->route('cart.view')->with('error', 'Your cart is empty');
         }
 
-        try {
+        try
 
-                $order = $this->orderService->placeOrder();
+        {
+            $order = $this->orderService->placeOrder($items);
 
-                $this->cartService->clear();
+            $this->cartService->clear();
 
-                // Redirect to the order detail page, assuming 'orders.show' route expects an order ID
-                return redirect()->route('orders.show', $order->id)->with('success', 'Order placed successfully');
+            // Redirect to the order detail page, assuming 'orders.show' route expects an order ID
+            return redirect()->route('orders.show', $order->id)->with('success', 'Order placed successfully');
 
         } catch (\Exception $e) {
             Log::error('Error placing order: ' . $e->getMessage());

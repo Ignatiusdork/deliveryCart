@@ -20,7 +20,7 @@ class OrderService
         $this->cartService = $cartService;
     }
 
-    public function placeOrder()
+    public function placeOrder(array $items)
     {
        // Fetch cart items from CartService and the totalprice
        $items = $this->cartService->view();
@@ -32,13 +32,13 @@ class OrderService
        }
 
        //generate order number
-       $orderNumber = Order::getNextOrderNumber();
+       //$orderNumber = Order::getNextOrderNumber();
 
         $order = Order::create([
             'user_id' => Auth::id(),
             'status' => 'pending',
             'total' => $totalPrice,
-            'order_number' => $orderNumber
+            //'order_number' => $orderNumber
         ]);
 
         foreach ($items as $item) {
@@ -62,8 +62,9 @@ class OrderService
         $this->createInvoice($order);
 
         return $order;
-    }
 
+    }
+    // get the genrated order number
     public function getNextOrderNumber() {
 
         $latestOrder = Order::orderBy('created_at', 'desc')->first();

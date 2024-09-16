@@ -32,4 +32,15 @@ class Order extends Model
     public function invoices() {
         return $this->hasMany(Invoice::class);
     }
+
+    public function getOrderNumberAttribute($value) {
+        return $value;
+    }
+
+    public function setOrderNumberAttribute($value) {
+        list($year, $month, $number) = explode('-',$value);
+        $this->attributes['year'] = $year;
+        $this->attributes['month'] = $month;
+        $this->attributes['order_number'] = sprintf('%06d', $number);
+    }
 }
