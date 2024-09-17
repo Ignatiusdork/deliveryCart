@@ -26,7 +26,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth'])->group(function () {Route::middleware(['auth'])->group(function () {
+    Route::get('/account/overview/{id}', [UserController::class, 'accountOverview'])->name('account.overview');
     Route::get('/account/overview/{id}', [UserController::class, 'accountOverview'])->name('account.overview');
 
     Route::get('/invoices/{invoiceId}/download', [OrderController::class, 'downloadInvoice'])->name('invoices.download');
