@@ -38,7 +38,9 @@
 
     @endif
 
-    <button type="submit" class="bg-blue-500 text-black px-4 py-2">{{ __('Account Overview') }}</button>
+    <a href="{{ route('account.overview', auth()->id()) }}" class="bg-green-500 hover:bg-green-700 text-black font-bold py-3 px-6 rounded text-lg mt-4">
+        Account Overview
+    </a>
 
 </div>
 @endsection
