@@ -32,7 +32,7 @@ class OrderService
        }
 
        //generate order number
-       //$orderNumber = Order::getNextOrderNumber();
+       $orderNumber = $this->getNextOrderNumber();
 
         $order = Order::create([
             'user_id' => Auth::id(),

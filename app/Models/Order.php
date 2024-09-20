@@ -34,13 +34,13 @@ class Order extends Model
     }
 
     public function getOrderNumberAttribute($value) {
-        return $value;
+        return $value ?: 'NA';
     }
 
     public function setOrderNumberAttribute($value) {
-        list($year, $month, $number) = explode('-',$value);
-        $this->attributes['year'] = $year;
-        $this->attributes['month'] = $month;
-        $this->attributes['order_number'] = sprintf('%06d', $number);
+        $this->attributes['order_number'] = $value;
+        $parts = explode('-', $value);
+        $this->attributes['year'] = isset($parts[0]) ? $parts[0] : null;
+        $this->attributes['month'] = isset($parts[1]) ? $parts[1] : null;
     }
 }
