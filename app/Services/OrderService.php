@@ -34,6 +34,8 @@ class OrderService
        //generate order number
        $orderNumber = $this->getNextOrderNumber();
 
+       dd(['orderNumber' => $orderNumber]);
+
         $order = Order::create([
             'user_id' => Auth::id(),
             'status' => 'pending',

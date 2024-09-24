@@ -7,6 +7,6 @@
 
 <ul>
     @foreach($orders as $order)
-        <li>{{ $invoice->invoice_number ?? 'N/A' }} - {{ $order->status }}</li>
+        <li>{{ $order->order_number ?? 'N/A' }} - {{ $order->status }}</li>
     @endforeach
 </ul>
