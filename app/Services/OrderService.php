@@ -34,14 +34,16 @@ class OrderService
        //generate order number
        $orderNumber = $this->getNextOrderNumber();
 
-       dd(['orderNumber' => $orderNumber]);
+       //dd(['orderNumber' => $orderNumber]);
 
         $order = Order::create([
             'user_id' => Auth::id(),
             'status' => 'pending',
             'total' => $totalPrice,
-            //'order_number' => $orderNumber
+            'order_number' => $orderNumber
         ]);
+
+        //dd($order);
 
         foreach ($items as $item) {
             OrderItem::create([
@@ -50,7 +52,6 @@ class OrderService
                 'quantity' => $item['quantity'],
                 'price' => $item['item']->price,
             ]);
-
         }
 
         // Update product stock after all items have been ordered
@@ -66,10 +67,14 @@ class OrderService
         return $order;
 
     }
+
     // get the genrated order number
     public function getNextOrderNumber() {
 
         $latestOrder = Order::orderBy('created_at', 'desc')->first();
+
+        dd(['latestOrder' => $latestOrder]);
+
         $currentYear = date('Y');
         $currentMonth = date('m');
 
