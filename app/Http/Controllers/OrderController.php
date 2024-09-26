@@ -26,7 +26,7 @@ class OrderController extends Controller
 
         $items = session()->get('cart', []);
 
-        //dd($items); // Dump the cart contents here
+        dd($items); // Dump the cart contents here
 
         if (empty($items)) {
             return redirect()->route('cart.view')->with('error', 'Your cart is empty');
