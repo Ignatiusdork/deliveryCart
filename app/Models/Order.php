@@ -43,4 +43,9 @@ class Order extends Model
         $this->attributes['year'] = isset($parts[0]) ? $parts[0] : null;
         $this->attributes['month'] = isset($parts[1]) ? $parts[1] : null;
     }
+
+    public function setMonthAttribute($value)
+{
+    $this->attributes['month'] = str_pad($value, 2, '0', STR_PAD_LEFT);
+}
 }

@@ -24,15 +24,6 @@ class DatabaseSeeder extends Seeder
 
         // Product::factory()->count(30)->create();
 
-        Order::all()->each(function ($order) {
-            $parts = explode('-', $order->created_at->format('Y-m'));
-            $order->update([
-                'year' => intval($parts[0]),
-                'month' => intval($parts[1]),
-                'order_number' => sprintf('%04d%s001', $parts[0], $parts[1]),
-            ]);
-        });
-
         $this->call([
             PopulateTempUserIdSeeder::class,
             UpdateNewUserIdSeeder::class,
