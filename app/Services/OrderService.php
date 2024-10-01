@@ -73,7 +73,7 @@ class OrderService
 
         $latestOrder = Order::orderBy('created_at', 'desc')->first();
 
-        dd(['latestOrder' => $latestOrder]);
+        //dd(['latestOrder' => $latestOrder]);
 
         $currentYear = date('Y');
         $currentMonth = date('m');
