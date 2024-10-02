@@ -61,7 +61,14 @@ Route::middleware(['auth'])->group(function(){
 
 //Route for tickets
 Route::middleware(['auth'])->group(function () {
-    Route::resource('tickets', TicketController::class)->except(['edit']);
+    //Route::resource('tickets', TicketController::class)->except(['edit']);
+
+    Route::get('/tickets', [TicketController::class, 'index'])->name('tickets.index');
+    Route::get('/tickets/create', [TicketController::class, 'create'])->name('tickets.create');
+    Route::post('/tickets/store', [TicketController::class, 'store'])->name('tickets.store');
+
+    Route::get('/tickets/{ticketId}', [TicketController::class, 'show'])->name('tickets.show');
+    Route::post('/tickets/{ticketId}/reply', [TicketController::class, 'reply'])->name('tickets.reply');
 
     Route::post('/tickets/{ticketId}/status', [TicketController::class, 'updateStatus'])->name('tickets.update-status');
     Route::post('/tickets/{ticketId}/close', [TicketController::class, 'close'])->name('tickets.close');

@@ -7,6 +7,7 @@ use App\Models\TicketReply;
 use Illuminate\Support\Facades\Validator;
 
 class TicketService {
+
     public function createTicket(array $data) {
         Validator::make($data, [
             'subject' => 'required|string|max:255',
